@@ -1,0 +1,19 @@
+<div class="order-btn" (click)="openModal()" [style]="buttonCustomStyle">
+  <a class="tt-button" [ngClass]="{'top': isTop, 'bottom': !isTop, 'left': isLeft, 'right': !isLeft}">
+    <div class="tt-button-text">
+      <span>{{buttonText}}</span>
+    </div>
+  </a>
+</div>
+
+<div class="wrapper-modal" *ngIf="isLoaded" [ngClass]="modalClass" [style]="modalCustomStyle">
+  <div *ngIf="isActive" class="overlay" (click)="clickOverlay()"></div>
+  <div class="torrow-modal">
+    <div *ngIf="isCloseButton">
+      <i class="button-close" (click)="closeModal();"></i>
+    </div>
+    <div class="content" *ngIf="sanitizedUrl">
+      <iframe class="i-frame" [src]="sanitizedUrl" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
