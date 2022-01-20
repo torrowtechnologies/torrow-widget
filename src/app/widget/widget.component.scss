@@ -19,19 +19,19 @@
 }
 
 .tt-button.bottom {
-  bottom: 32px !important
+  bottom: var(--bottom-margin) !important
 }
 
 .tt-button.top {
-  top: 32px !important
+  top: var(--top-margin) !important
 }
 
 .tt-button.right {
-  right: 32px !important
+  right: var(--right-margin) !important
 }
 
 .tt-button.left {
-  left: 32px !important
+  left: var(--left-margin) !important
 }
 
 .tt-button::before {
@@ -77,7 +77,7 @@
   font-weight: var(--font-weight) !important;
   text-align: center !important;
   letter-spacing: 1.5px !important;
-  font-family: play, sans-serif !important;
+  font-family: var(--font-family) !important;
   z-index: 1;
 }
 

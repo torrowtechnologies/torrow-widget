@@ -58,6 +58,21 @@ export class WidgetComponent {
   showWidgetButton = true;
 
   @Input()
+  fontFamily?: string;
+
+  @Input()
+  bottomMargin?: string;
+
+  @Input()
+  topMargin?: string;
+
+  @Input()
+  rightMargin?: string;
+
+  @Input()
+  leftMargin?: string;
+
+  @Input()
   public set modalActive(val: string | boolean) {
     this.isActive = String(val) === 'true';
   }
@@ -125,6 +140,11 @@ export class WidgetComponent {
       '--text-color': this.textColor ?? '#fff',
       '--button-color': this.buttonColor ?? '#5F4B8B',
       '--wave-color': this.waveColor ?? '#5F4B8B',
+      '--font-family': this.fontFamily ?? 'play, sans-serif',
+      '--bottom-margin': this.bottomMargin ?? '32px',
+      '--top-margin': this.topMargin ?? '32px',
+      '--right-margin': this.rightMargin ?? '32px',
+      '--left-margin': this.leftMargin ?? '32px',
     };
   }
 
