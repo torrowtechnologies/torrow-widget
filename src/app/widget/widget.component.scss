@@ -22,6 +22,11 @@
   bottom: var(--bottom-margin) !important
 }
 
+.tt-button.center {
+  left: calc(50% - (var(--button-size) / 2));
+  top: calc(50% - (var(--button-size) / 2));
+}
+
 .tt-button.top {
   top: var(--top-margin) !important
 }
@@ -189,7 +194,6 @@
   left: -2450px;
   top: 55%;
   transform: translate(-50%, -50%);
-  height: 510px;
 }
 
 .center .button-close {

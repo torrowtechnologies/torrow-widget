@@ -13,10 +13,10 @@ export class WidgetComponent {
   public url: string;
 
   @Input()
-  public buttonX: string;
+  public buttonX = 'right';
 
   @Input()
-  public buttonY: string;
+  public buttonY = 'bottom';
 
   @Input()
   public modalWidth?: string;
@@ -120,8 +120,20 @@ export class WidgetComponent {
     return this.buttonX === 'left';
   }
 
+  public get isRight(): boolean {
+    return this.buttonX === 'right';
+  }
+
   public get isTop(): boolean {
     return this.buttonY === 'top';
+  }
+
+  public get isBottom(): boolean {
+    return this.buttonY === 'bottom';
+  }
+
+  public get isCenter(): boolean {
+    return this.buttonY === 'center' || this.buttonX === 'center';
   }
 
   public get modalCustomStyle(): Record<string, string> {
