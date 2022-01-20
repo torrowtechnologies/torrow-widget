@@ -1,4 +1,4 @@
-<div class="order-btn" (click)="openModal()" [style]="buttonCustomStyle">
+<div class="order-btn" *ngIf="isWidgetButton" (click)="openModal()" [style]="buttonCustomStyle">
   <a class="tt-button" [ngClass]="{'top': isTop, 'bottom': !isTop, 'left': isLeft, 'right': !isLeft}">
     <div class="tt-button-text">
       <span>{{buttonText}}</span>
@@ -6,7 +6,7 @@
   </a>
 </div>
 
-<div class="wrapper-modal" *ngIf="isLoaded" [ngClass]="modalClass" [style]="modalCustomStyle">
+<div class="wrapper-modal" [ngClass]="modalClass" [style]="modalCustomStyle">
   <div *ngIf="isActive" class="overlay" (click)="clickOverlay()"></div>
   <div class="torrow-modal">
     <div *ngIf="isCloseButton">

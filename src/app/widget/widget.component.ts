@@ -54,8 +54,16 @@ export class WidgetComponent {
   @Input()
   public modal = 'center';
 
+  @Input()
+  showWidgetButton = true;
+
+  @Input()
+  public set modalActive(val: string | boolean) {
+    this.isActive = String(val) === 'true';
+  }
+
   public isActive: boolean;
-  public isLoaded: boolean;
+
   public sanitizedUrlResource: SafeResourceUrl;
 
   constructor(
@@ -64,7 +72,7 @@ export class WidgetComponent {
   }
 
   public get sanitizedUrl(): SafeResourceUrl | undefined {
-    if (this.sanitizedUrlResource) {
+    if (this.sanitizedUrlResource && this.isActive) {
       return this.sanitizedUrlResource;
     }
 
@@ -78,10 +86,6 @@ export class WidgetComponent {
   }
 
   public openModal(): void {
-    if (!this.isLoaded) {
-      this.isLoaded = true;
-    }
-
     if (!this.isActive) {
       this.isActive = true;
     }
@@ -122,6 +126,10 @@ export class WidgetComponent {
       '--button-color': this.buttonColor ?? '#5F4B8B',
       '--wave-color': this.waveColor ?? '#5F4B8B',
     };
+  }
+
+  public get isWidgetButton(): boolean {
+    return String(this.showWidgetButton) === 'true';
   }
 
   public get isCloseButton(): boolean {
