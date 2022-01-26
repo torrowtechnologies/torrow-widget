@@ -6,7 +6,6 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
   templateUrl: './widget.component.html',
   styleUrls: ['./widget.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class WidgetComponent {
   @Input()
@@ -101,12 +100,16 @@ export class WidgetComponent {
   }
 
   public openModal(): void {
+    this.overlapOtherWidgets(true);
+
     if (!this.isActive) {
       this.isActive = true;
     }
   }
 
   public closeModal(): void {
+    this.overlapOtherWidgets(false);
+
     if (this.isActive) {
       this.isActive = false;
     }
@@ -170,5 +173,13 @@ export class WidgetComponent {
 
   public clickOverlay(): void {
     this.closeModal();
+  }
+
+  private overlapOtherWidgets(hide: boolean): void {
+    const jdiv = document.querySelector('jdiv') as HTMLElement;
+
+    if (jdiv) {
+      jdiv.style.display = hide ? 'none' : 'block';
+    }
   }
 }
