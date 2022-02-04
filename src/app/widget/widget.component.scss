@@ -1,5 +1,5 @@
 // button
-.order-btn {
+.tt-order-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,25 +18,25 @@
   z-index: 2147483647;
 }
 
-.tt-button.bottom {
-  bottom: var(--bottom-margin) !important
+.tt-button.tt-bottom {
+  bottom: var(--bottom-margin) !important;
 }
 
-.tt-button.center {
+.tt-button.tt-center {
   left: calc(50% - (var(--button-size) / 2));
   top: calc(50% - (var(--button-size) / 2));
 }
 
-.tt-button.top {
-  top: var(--top-margin) !important
+.tt-button.tt-top {
+  top: var(--top-margin) !important;
 }
 
-.tt-button.right {
-  right: var(--right-margin) !important
+.tt-button.tt-right {
+  right: var(--right-margin) !important;
 }
 
-.tt-button.left {
-  left: var(--left-margin) !important
+.tt-button.tt-left {
+  left: var(--left-margin) !important;
 }
 
 .tt-button::before {
@@ -49,11 +49,11 @@
   border-radius: 100% !important;
   background-color: var(--button-color);
   opacity: .8 !important;
-  box-sizing: border-box !important
+  box-sizing: border-box !important;
 }
 
 .tt-button::after {
-  content:'';
+  content: '';
   position: absolute !important;
   left: 50% !important;
   top: 50% !important;
@@ -92,7 +92,7 @@
     width: 200%;
     height: 200%;
     border-color: transparent;
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -101,7 +101,7 @@
     width: 200%;
     height: 200%;
     border-color: transparent;
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -110,7 +110,7 @@
     width: 200%;
     height: 200%;
     border-color: transparent;
-    opacity: 0
+    opacity: 0;
   }
 }
 
@@ -119,18 +119,18 @@
     width: 200%;
     height: 200%;
     border-color: transparent;
-    opacity: 0
+    opacity: 0;
   }
 }
 
 // modal
-.wrapper-modal {
+.tt-wrapper-modal {
   width: 100%;
   height: 100%;
   transition: 0.5s;
 }
 
-.overlay {
+.tt-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -152,7 +152,7 @@
   background-color: #ffffff;
 }
 
-.button-close {
+.tt-button-close {
   position: absolute;
   top: 5px;
   cursor: pointer;
@@ -164,55 +164,54 @@
   z-index: 2147483647;
 }
 
-.content {
-  height: 100%
+.tt-content {
+  height: 100%;
 }
 
-.i-frame {
+.tt-i-frame {
   height: 100%;
-  max-width: var(--modal-width);
   width: 100%;
 }
 
-.right.active .torrow-modal {
+.tt-right.active .torrow-modal {
   right: 0;
 }
 
-.right .torrow-modal {
+.tt-right .torrow-modal {
   right: -2450px;
 }
 
-.left .torrow-modal {
+.tt-left .torrow-modal {
   left: -2450px;
 }
 
-.left.active .torrow-modal {
+.tt-left.active .torrow-modal {
   left: 0;
 }
 
-.center.active .torrow-modal {
+.tt-center.active .torrow-modal {
   left: 50%;
 }
 
-.center .torrow-modal {
+.tt-center .torrow-modal {
   left: -2450px;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-.center .button-close {
+.tt-center .tt-button-close {
   right: 5px;
 }
 
-.left .button-close {
+.tt-left .tt-button-close {
   right: -33px;
 }
 
-.right .button-close {
+.tt-right .tt-button-close {
   left: -33px;
 }
 
-.button-close:hover {
+.tt-button-close:hover {
   opacity: 1;
 }
 
@@ -224,11 +223,11 @@
     max-height: 100%;
   }
 
-  .left .button-close {
+  .tt-left .tt-button-close {
     right: 5px;
   }
 
-  .right .button-close {
+  .tt-right .tt-button-close {
     left: 5px;
   }
 }

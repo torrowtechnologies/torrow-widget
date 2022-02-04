@@ -116,7 +116,7 @@ export class WidgetComponent {
   }
 
   public get modalClass(): string {
-    return this.isActive ? `${this.modal} active` : `${this.modal}`;
+    return this.isActive ? `tt-${this.modal} active` : `tt-${this.modal}`;
   }
 
   public get isLeft(): boolean {
