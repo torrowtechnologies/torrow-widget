@@ -54,22 +54,22 @@ export class WidgetComponent {
   public modal = 'center';
 
   @Input()
-  showWidgetButton = true;
+  public showWidgetButton = true;
 
   @Input()
-  fontFamily?: string;
+  public fontFamily?: string;
 
   @Input()
-  bottomMargin?: string;
+  public bottomMargin?: string;
 
   @Input()
-  topMargin?: string;
+  public topMargin?: string;
 
   @Input()
-  rightMargin?: string;
+  public rightMargin?: string;
 
   @Input()
-  leftMargin?: string;
+  public leftMargin?: string;
 
   @Input()
   public set modalActive(val: string | boolean) {
