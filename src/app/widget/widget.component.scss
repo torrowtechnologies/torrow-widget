@@ -74,7 +74,7 @@
   -o-animation: wave-stroke 2s infinite cubic-bezier(.37, 0, .8, .77);
 }
 
-.tt-button-text {
+.tt-button-text-container {
   width: var(--text-button-width) !important;
   color: var(--text-color) !important;
   font-size: var(--font-size) !important;
@@ -86,6 +86,10 @@
   z-index: 1;
 }
 
+.tt-button-text {
+  margin: 0!important;
+  padding: 0!important;
+}
 
 @-webkit-keyframes wave-stroke {
   100% {
