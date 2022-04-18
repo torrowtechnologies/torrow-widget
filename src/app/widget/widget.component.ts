@@ -9,7 +9,15 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 })
 export class WidgetComponent {
   @Input()
-  public url: string;
+  public set url(value: string) {
+    if (value) {
+      const parentParams = new URLSearchParams(new URL(value).search).toString();
+      const childParams = new URLSearchParams(location.search).toString();
+      const url = new URL(value);
+
+      this.widgetUrl = url.origin + url.pathname + `?${parentParams}&${childParams}`;
+    }
+  }
 
   @Input()
   public buttonX = 'right';
@@ -76,6 +84,7 @@ export class WidgetComponent {
     this.isActive = String(val) === 'true';
   }
 
+  public widgetUrl?: string;
   public isActive: boolean;
 
   public sanitizedUrlResource: SafeResourceUrl;
@@ -90,8 +99,8 @@ export class WidgetComponent {
       return this.sanitizedUrlResource;
     }
 
-    if (this.url) {
-      this.sanitizedUrlResource = this.domSanitizer.bypassSecurityTrustResourceUrl(this.url);
+    if (this.widgetUrl) {
+      this.sanitizedUrlResource = this.domSanitizer.bypassSecurityTrustResourceUrl(this.widgetUrl);
 
       return this.sanitizedUrlResource;
     }
