@@ -1,5 +1,8 @@
 import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {increaseBrightness} from '../utils/color';
+import {ButtonStyleEnum} from '../models/button-style.enum';
+import {ButtonPositionEnum} from '../models/button-position.enum';
 
 @Component({
   selector: 'torrow-widget',
@@ -20,10 +23,10 @@ export class WidgetComponent {
   }
 
   @Input()
-  public buttonX = 'right';
+  public buttonX = ButtonPositionEnum.Right;
 
   @Input()
-  public buttonY = 'bottom';
+  public buttonY = ButtonPositionEnum.Bottom;
 
   @Input()
   public modalWidth?: string;
@@ -80,18 +83,31 @@ export class WidgetComponent {
   public leftMargin?: string;
 
   @Input()
+  public buttonStyle?: string;
+
+  @Input()
   public set modalActive(val: string | boolean) {
     this.isActive = String(val) === 'true';
   }
 
+  @Input()
+  public set squareAnimation(val: string | boolean) {
+    this.isGlowing = String(val) === 'true';
+  }
+
   public widgetUrl?: string;
   public isActive: boolean;
+  public isGlowing: boolean;
 
   public sanitizedUrlResource: SafeResourceUrl;
 
   constructor(
     private readonly domSanitizer: DomSanitizer
   ) {
+  }
+
+  public get isSquareButton(): boolean {
+    return this.buttonStyle === ButtonStyleEnum.Square;
   }
 
   public get sanitizedUrl(): SafeResourceUrl | undefined {
@@ -129,23 +145,23 @@ export class WidgetComponent {
   }
 
   public get isLeft(): boolean {
-    return this.buttonX === 'left';
+    return this.buttonX === ButtonPositionEnum.Left;
   }
 
   public get isRight(): boolean {
-    return this.buttonX === 'right';
+    return this.buttonX === ButtonPositionEnum.Right;
   }
 
   public get isTop(): boolean {
-    return this.buttonY === 'top';
+    return this.buttonY === ButtonPositionEnum.Top;
   }
 
   public get isBottom(): boolean {
-    return this.buttonY === 'bottom';
+    return this.buttonY === ButtonPositionEnum.Bottom;
   }
 
   public get isCenter(): boolean {
-    return this.buttonY === 'center' || this.buttonX === 'center';
+    return this.buttonY === ButtonPositionEnum.Center || this.buttonX === ButtonPositionEnum.Center;
   }
 
   public get modalCustomStyle(): Record<string, string> {
@@ -163,6 +179,7 @@ export class WidgetComponent {
       '--font-weight': this.fontWeight ?? '400',
       '--text-color': this.textColor ?? '#fff',
       '--button-color': this.buttonColor ?? '#5F4B8B',
+      '--button-lighten-color': increaseBrightness(this.waveColor ?? '#5F4B8B', 20),
       '--wave-color': this.waveColor ?? '#5F4B8B',
       '--font-family': this.fontFamily ?? 'play, sans-serif',
       '--bottom-margin': this.bottomMargin ?? '32px',

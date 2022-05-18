@@ -1,5 +1,5 @@
 <div class="tt-order-btn" *ngIf="isWidgetButton" (click)="openModal()" [style]="buttonCustomStyle">
-  <div class="tt-button" [ngClass]="{'tt-top': isTop, 'tt-bottom': isBottom, 'tt-left': isLeft, 'tt-right': isRight, 'tt-center': isCenter}">
+  <div [ngClass]="{'tt-button': !isSquareButton, 'tt-square-button': isSquareButton, 'square-animation': isGlowing, 'tt-top': isTop, 'tt-bottom': isBottom, 'tt-left': isLeft, 'tt-right': isRight, 'tt-center': isCenter}">
     <div class="tt-button-text-container">
       <span class="tt-button-text">{{buttonText}}</span>
     </div>
