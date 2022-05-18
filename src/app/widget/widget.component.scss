@@ -68,7 +68,7 @@
   border-radius: 60px;
 }
 
-.tt-rectangle-button.rectangle-animation::before {
+.tt-rectangle-button.button-animation::before {
   animation: glowing 1300ms infinite;
 }
 
@@ -89,8 +89,11 @@
   height: 105%;
   opacity: .9 !important;
   box-sizing: border-box !important;
-  animation: wave-stroke 2s infinite cubic-bezier(.37, 0, .8, .77);
   transform: translate(-50%, -50%) !important;
+}
+
+.tt-button.button-animation::after {
+  animation: wave-stroke 2s infinite cubic-bezier(.37, 0, .8, .77);
   -webkit-transform: translate(-50%, -50%) !important;
   -moz-transform: translate(-50%, -50%) !important;
   -o-transform: translate(-50%, -50%) !important;

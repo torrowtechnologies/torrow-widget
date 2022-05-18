@@ -91,13 +91,13 @@ export class WidgetComponent {
   }
 
   @Input()
-  public set rectangleAnimation(val: string | boolean) {
-    this.isGlowing = String(val) === 'true';
+  public set buttonAnimation(val: string | boolean) {
+    this.isAnimating = String(val) === 'true';
   }
 
   public widgetUrl?: string;
   public isActive: boolean;
-  public isGlowing: boolean;
+  public isAnimating = true;
 
   public sanitizedUrlResource: SafeResourceUrl;
 
