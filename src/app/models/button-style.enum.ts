@@ -1,4 +1,4 @@
 export enum ButtonStyleEnum {
-  Square = 'square',
-  Round = 'round'
+  Rectangle = 'rectangle',
+  Circle = 'circle'
 }

@@ -5,7 +5,7 @@
   justify-content: center;
 }
 
-.tt-square-button,
+.tt-rectangle-button,
 .tt-button {
   display: flex;
   align-items: center;
@@ -21,37 +21,37 @@
   width: var(--button-size) !important;
 }
 
-.tt-square-button {
+.tt-rectangle-button {
   width: calc(var(--button-size) * 3) !important;
 }
 
-.tt-square-button.tt-bottom,
+.tt-rectangle-button.tt-bottom,
 .tt-button.tt-bottom {
   bottom: var(--bottom-margin) !important;
 }
 
-.tt-square-button.tt-center,
+.tt-rectangle-button.tt-center,
 .tt-button.tt-center {
   left: calc(50% - (var(--button-size) / 2));
   top: calc(50% - (var(--button-size) / 2));
 }
 
-.tt-square-button.tt-top,
+.tt-rectangle-button.tt-top,
 .tt-button.tt-top {
   top: var(--top-margin) !important;
 }
 
-.tt-square-button.tt-right,
+.tt-rectangle-button.tt-right,
 .tt-button.tt-right {
   right: var(--right-margin) !important;
 }
 
-.tt-square-button.tt-left,
+.tt-rectangle-button.tt-left,
 .tt-button.tt-left {
   left: var(--left-margin) !important;
 }
 
-.tt-square-button::before,
+.tt-rectangle-button::before,
 .tt-button::before {
   content: '';
   position: absolute !important;
@@ -63,12 +63,12 @@
   box-sizing: border-box !important;
 }
 
-.tt-square-button::before {
+.tt-rectangle-button::before {
   width: calc(var(--button-size) * 3) !important;
   border-radius: 60px;
 }
 
-.tt-square-button.square-animation::before {
+.tt-rectangle-button.rectangle-animation::before {
   animation: glowing 1300ms infinite;
 }
 
@@ -100,7 +100,7 @@
 }
 
 .tt-button .tt-button-text-container,
-.tt-square-button .tt-button-text-container {
+.tt-rectangle-button .tt-button-text-container {
   color: var(--text-color) !important;
   font-size: var(--font-size) !important;
   font-weight: var(--font-weight) !important;

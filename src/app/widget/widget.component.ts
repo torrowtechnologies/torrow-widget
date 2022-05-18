@@ -91,7 +91,7 @@ export class WidgetComponent {
   }
 
   @Input()
-  public set squareAnimation(val: string | boolean) {
+  public set rectangleAnimation(val: string | boolean) {
     this.isGlowing = String(val) === 'true';
   }
 
@@ -106,8 +106,8 @@ export class WidgetComponent {
   ) {
   }
 
-  public get isSquareButton(): boolean {
-    return this.buttonStyle === ButtonStyleEnum.Square;
+  public get isRectangleButton(): boolean {
+    return this.buttonStyle === ButtonStyleEnum.Rectangle;
   }
 
   public get sanitizedUrl(): SafeResourceUrl | undefined {
