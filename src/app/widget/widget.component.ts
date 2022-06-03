@@ -166,7 +166,7 @@ export class WidgetComponent {
 
   public get modalCustomStyle(): Record<string, string> {
     return {
-      '--modal-width': this.modalWidth ?? '350px',
+      '--modal-width': this.modalWidth ?? '500px',
       '--modal-height': this.modalHeight ?? '100%',
     };
   }
