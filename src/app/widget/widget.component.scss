@@ -115,7 +115,7 @@
 
 .tt-button .tt-button-text-container {
   width: var(--text-button-width) !important;
-  line-height: 25px !important;
+  line-height: var(--line-height) !important;
 }
 
 .tt-button-text {

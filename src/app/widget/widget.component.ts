@@ -83,6 +83,9 @@ export class WidgetComponent {
   public leftMargin?: string;
 
   @Input()
+  public lineHeight?: string;
+
+  @Input()
   public buttonStyle?: string;
 
   @Input()
@@ -186,6 +189,7 @@ export class WidgetComponent {
       '--top-margin': this.topMargin ?? '32px',
       '--right-margin': this.rightMargin ?? '32px',
       '--left-margin': this.leftMargin ?? '32px',
+      '--line-height': this.lineHeight ?? '25px',
     };
   }
 
