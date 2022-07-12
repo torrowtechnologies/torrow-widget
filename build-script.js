@@ -8,7 +8,7 @@ const concat = require('concat');
     './dist/widget2/main.js'
   ]
 
-  await fs.ensureDir('elements')
+  await fs.ensureDir('dist')
 
-  await concat(files, 'elements/torrow-widget.js')
+  await concat(files, 'dist/torrow-widget.min.js')
 })()
