@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {increaseBrightness} from '../utils/color';
 import {ButtonStyleEnum} from '../models/button-style.enum';
@@ -89,6 +89,10 @@ export class WidgetComponent {
   public buttonStyle?: string;
 
   @Input()
+  public set preserveRatio(val: string | boolean) {
+    this.preservePixelRatio = String(val) === 'true';
+  }
+  @Input()
   public set modalActive(val: string | boolean) {
     this.isActive = String(val) === 'true';
   }
@@ -101,11 +105,12 @@ export class WidgetComponent {
   public widgetUrl?: string;
   public isActive: boolean;
   public isAnimating = true;
+  public preservePixelRatio = false;
 
   public sanitizedUrlResource: SafeResourceUrl;
 
   constructor(
-    private readonly domSanitizer: DomSanitizer
+    private readonly domSanitizer: DomSanitizer,
   ) {
   }
 
@@ -128,10 +133,14 @@ export class WidgetComponent {
   }
 
   public openModal(): void {
-    this.overlapOtherWidgets(true);
+    if (window.devicePixelRatio >= 2 && this.preservePixelRatio) {
+      window.open(this.widgetUrl, '_blank');
+    } else {
+      this.overlapOtherWidgets(true);
 
-    if (!this.isActive) {
-      this.isActive = true;
+      if (!this.isActive) {
+        this.isActive = true;
+      }
     }
   }
 
@@ -174,7 +183,7 @@ export class WidgetComponent {
     };
   }
 
-  public get buttonCustomStyle(): Record<string, string> {
+  public get buttonCustomStyle(): Record<string, string | number> {
     return {
       '--button-size': this.buttonSize ? `${this.buttonSize}px` : '100px',
       '--text-button-width': this.textButtonWidth ? `${this.textButtonWidth}px` : this.buttonSize > 10 ? `${this.buttonSize - 10}px` : '90px',
@@ -190,6 +199,7 @@ export class WidgetComponent {
       '--right-margin': this.rightMargin ?? '32px',
       '--left-margin': this.leftMargin ?? '32px',
       '--line-height': this.lineHeight ?? '25px',
+      zoom: window.devicePixelRatio >= 2 && this.preservePixelRatio ? window.devicePixelRatio : undefined,
     };
   }
 

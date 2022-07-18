@@ -113,9 +113,13 @@
   z-index: 1;
 }
 
+.tt-button .tt-button-text-container,
+.tt-rectangle-button .tt-button-text-container {
+  line-height: var(--line-height) !important;
+}
+
 .tt-button .tt-button-text-container {
   width: var(--text-button-width) !important;
-  line-height: var(--line-height) !important;
 }
 
 .tt-button-text {
