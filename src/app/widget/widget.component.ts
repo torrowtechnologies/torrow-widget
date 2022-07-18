@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 import {increaseBrightness} from '../utils/color';
 import {ButtonStyleEnum} from '../models/button-style.enum';
@@ -89,9 +89,13 @@ export class WidgetComponent {
   public buttonStyle?: string;
 
   @Input()
+  public pixelRatio?: number;
+
+  @Input()
   public set preserveRatio(val: string | boolean) {
     this.preservePixelRatio = String(val) === 'true';
   }
+
   @Input()
   public set modalActive(val: string | boolean) {
     this.isActive = String(val) === 'true';
@@ -111,7 +115,17 @@ export class WidgetComponent {
 
   constructor(
     private readonly domSanitizer: DomSanitizer,
+    private readonly cdr: ChangeDetectorRef,
   ) {
+  }
+
+  @HostListener('window:orientationchange', ['$event'])
+  public onOrientationChange(): void {
+    if (this.preservePixelRatio) {
+      setTimeout(() => { // We need it to recalcultate buttonCustomStyle after orientation changed
+        this.cdr.detectChanges();
+      }, 100);
+    }
   }
 
   public get isRectangleButton(): boolean {
@@ -133,8 +147,12 @@ export class WidgetComponent {
   }
 
   public openModal(): void {
-    if (window.devicePixelRatio >= 2 && this.preservePixelRatio) {
-      window.open(this.widgetUrl, '_blank');
+    if (this.preserveMode) {
+      const externalUrl = new URL(this.widgetUrl);
+      externalUrl.searchParams.delete('closeButtonHidden');
+      externalUrl.searchParams.delete('tabBarHidden');
+
+      window.open(externalUrl.href, '_blank');
     } else {
       this.overlapOtherWidgets(true);
 
@@ -199,7 +217,7 @@ export class WidgetComponent {
       '--right-margin': this.rightMargin ?? '32px',
       '--left-margin': this.leftMargin ?? '32px',
       '--line-height': this.lineHeight ?? '25px',
-      zoom: window.devicePixelRatio >= 2 && this.preservePixelRatio ? window.devicePixelRatio : undefined,
+      zoom: this.preserveMode ? this.pixelRatio ?? 2 : undefined,
     };
   }
 
@@ -213,6 +231,10 @@ export class WidgetComponent {
 
   public clickOverlay(): void {
     this.closeModal();
+  }
+
+  private get preserveMode(): boolean {
+    return window.matchMedia('(orientation: portrait)').matches && window.devicePixelRatio >= 2 && this.preservePixelRatio;
   }
 
   private overlapOtherWidgets(hide: boolean): void {
