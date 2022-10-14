@@ -1,5 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Input} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, Inject, Input} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
+
 import {increaseBrightness} from '../utils/color';
 import {ButtonStyleEnum} from '../models/button-style.enum';
 import {ButtonPositionEnum} from '../models/button-position.enum';
@@ -92,6 +94,9 @@ export class WidgetComponent {
   public pixelRatio?: number;
 
   @Input()
+  public mobileScale?: number;
+
+  @Input()
   public set preserveRatio(val: string | boolean) {
     this.preservePixelRatio = String(val) === 'true';
   }
@@ -116,6 +121,7 @@ export class WidgetComponent {
   constructor(
     private readonly domSanitizer: DomSanitizer,
     private readonly cdr: ChangeDetectorRef,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {
   }
 
@@ -202,10 +208,17 @@ export class WidgetComponent {
   }
 
   public get buttonCustomStyle(): Record<string, string | number> {
+    const isMobile = this.document.defaultView.innerWidth <= 428; // Iphone 12 pro max viewport size
+    const defaultButtonSize = this.buttonSize ?? 100;
+    const defaultFontSize = this.fontSize ?? 15;
+
+    const buttonSize = isMobile ? Math.floor(defaultButtonSize * (this.mobileScale ?? 0.7)) : defaultButtonSize;
+    const fontSize = isMobile ? Math.floor(defaultFontSize * (this.mobileScale ?? 0.7)) : defaultFontSize;
+
     return {
-      '--button-size': this.buttonSize ? `${this.buttonSize}px` : '100px',
-      '--text-button-width': this.textButtonWidth ? `${this.textButtonWidth}px` : this.buttonSize > 10 ? `${this.buttonSize - 10}px` : '90px',
-      '--font-size': this.fontSize ? `${this.fontSize}px` : '15px',
+      '--button-size': `${buttonSize}px`,
+      '--text-button-width': `${this.textButtonWidth ?? buttonSize - 10}px`,
+      '--font-size': `${fontSize}px`,
       '--font-weight': this.fontWeight ?? '400',
       '--text-color': this.textColor ?? '#fff',
       '--button-color': this.buttonColor ?? '#5F4B8B',
